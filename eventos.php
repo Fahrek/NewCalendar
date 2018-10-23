@@ -5,7 +5,8 @@ $pdo = new PDO("mysql:dbname=sistema; host = localhost", "root", "");
 
 $accion = (isset($_GET['accion'])) ? $_GET['accion'] : 'leer';
 
-switch ($accion) {
+switch ($accion) 
+{
     case 'agregar':
     // Instrucción de agregar
         $sentenciaSQL = $pdo->prepare("INSERT INTO eventos(
@@ -36,7 +37,8 @@ switch ($accion) {
     case 'eliminar':
     // Instrucción de eliminar
         $respuesta = false;
-        if(isset($_POST['id'])){
+        if(isset($_POST['id']))
+        {
             $sentenciaSQL = $pdo->prepare("DELETE FROM eventos WHERE ID=:ID");
             $respuesta    = $sentenciaSQL->execute(array("ID"=>$_POST['id']));   
         }

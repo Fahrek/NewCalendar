@@ -53,8 +53,10 @@
         </div>
 
         <script>
-            $(document).ready(function () {
-                $('#CalendarioWeb').fullCalendar({
+            $(document).ready(function () 
+            {
+                $('#CalendarioWeb').fullCalendar(
+                {
                     header:
                             {
                                 left: 'today,prev,next',
@@ -62,7 +64,8 @@
                                 right: 'month,basicWeek,basicDay,agendaWeek,agendaDay'
                             },
 
-                    dayClick: function (date, jsEvent, view) {
+                    dayClick: function (date, jsEvent, view) 
+                    {
 
                         $('#btnAgregar').prop("disabled", false);
                         $('#btnModificar').prop("disabled", true);
@@ -75,7 +78,8 @@
 
                     events: 'http://localhost/calendarioweb/eventos.php',
 
-                    eventClick: function (calEvent, jsEvent, view) {
+                    eventClick: function (calEvent, jsEvent, view) 
+                    {
 
                         $('#btnAgregar').prop("disabled", true);
                         $('#btnModificar').prop("disabled", false);
@@ -97,7 +101,8 @@
                         $("#ModalEventos").modal();
                     },
                     editable: true,
-                    eventDrop: function (calEvent) {
+                    eventDrop: function (calEvent) 
+                    {
                         $('#txtID').val(calEvent.id);
                         $('#txtTitulo').val(calEvent.title);
                         $('#txtColor').val(calEvent.color);
@@ -165,23 +170,28 @@
             <script>
                 var NuevoEvento;
 
-                $('#btnAgregar').click(function () {
+                $('#btnAgregar').click(function () 
+                {
                     CapturarDatosGUI();
                     EnviarInformacion('agregar', NuevoEvento);
                 });
 
-                $('#btnEliminar').click(function () {
+                $('#btnEliminar').click(function () 
+                {
                     CapturarDatosGUI();
                     EnviarInformacion('eliminar', NuevoEvento);
                 });
 
-                $('#btnModificar').click(function () {
+                $('#btnModificar').click(function () 
+                {
                     CapturarDatosGUI();
                     EnviarInformacion('modificar', NuevoEvento);
                 });
 
-                function CapturarDatosGUI() {
-                    NuevoEvento = {
+                function CapturarDatosGUI() 
+                {
+                    NuevoEvento = 
+                    {
                         id: $('#txtID').val(),
                         title: $('#txtTitulo').val(),
                         start: $('#txtFecha').val() + " " + $('#txtHora').val(),
@@ -192,32 +202,40 @@
                     };
                 }
 
-                function EnviarInformacion(accion, objEvento, modal) {
-                    $.ajax({
+                function EnviarInformacion(accion, objEvento, modal) 
+                {
+                    $.ajax(
+                    {
                         type: 'POST',
                         url: 'eventos.php?accion=' + accion,
                         data: objEvento,
-                        success: function (msg) {
-                            if (msg) {
+                        success: function (msg) 
+                        {
+                            if (msg) 
+                            {
                                 $('#CalendarioWeb').fullCalendar('refetchEvents');
-                                if (!modal) {
+                                if (!modal) 
+                                {
                                     $("#ModalEventos").modal('toggle');
                                 }
                             }
                         },
-                        error: function () {
+                        error: function () 
+                        {
                             alert("Hay un error ..");
                         }
                     });
                 }
                 $('.clockpicker').clockpicker();
-                function limpiarFormulario() {
+                function limpiarFormulario() 
+                {
                     $('#txtID').val('');
                     $('#txtTitulo').val('');
                     $('#txtColor').val('');
                     $('#txtDescripcion').val('');
                 }
             </script>
+        </div>
     </body>
-
 </html>
+
