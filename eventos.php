@@ -1,15 +1,15 @@
 <?php
 
 header('Content-Type: application/json');
-$pdo = new PDO("mysql:dbname=sistema; host = localhost", "root", "");
+$pdo = new PDO("mysql:dbname=sistema; host = localhost", "root", ""); //
 
 $accion = (isset($_GET['accion'])) ? $_GET['accion'] : 'leer';
 
 switch ($accion) 
 {
     case 'agregar':
-    // Instrucción de agregar
-        $sentenciaSQL = $pdo->prepare("INSERT INTO eventos(
+    // Instrucción para agregar
+        $sentenciaSQL = $pdo -> prepare("INSERT INTO eventos(
             title,
             descripcion,
             color,
@@ -24,7 +24,7 @@ switch ($accion)
                 :start,
                 :end)"
             );
-        $respuesta    = $sentenciaSQL->execute(array(
+        $respuesta = $sentenciaSQL -> execute(array(
             "title"       => $_POST['title'],
             "descripcion" => $_POST['descripcion'],
             "color"       => $_POST['color'],
@@ -35,18 +35,18 @@ switch ($accion)
         echo json_encode($respuesta);    
         break;
     case 'eliminar':
-    // Instrucción de eliminar
+    // Instrucción para eliminar
         $respuesta = false;
         if(isset($_POST['id']))
         {
-            $sentenciaSQL = $pdo->prepare("DELETE FROM eventos WHERE ID=:ID");
-            $respuesta    = $sentenciaSQL->execute(array("ID"=>$_POST['id']));   
+            $sentenciaSQL = $pdo -> prepare("DELETE FROM eventos WHERE ID=:ID");
+            $respuesta    = $sentenciaSQL -> execute(array("ID"=>$_POST['id']));   
         }
         echo json_encode($respuesta);
         break;
     case 'modificar':
-    // Instrucción de modificar
-        $sentenciaSQL = $pdo->prepare("UPDATE eventos 
+    // Instrucción para modificar
+        $sentenciaSQL = $pdo -> prepare("UPDATE eventos 
         SET 
             title       = :title, 
             descripcion = :descripcion, 
@@ -56,7 +56,7 @@ switch ($accion)
             end         = :end 
             WHERE ID    = :ID
             ");
-        $respuesta = $sentenciaSQL->execute(array(
+        $respuesta = $sentenciaSQL -> execute(array(
             "ID"          => $_POST['id'],
             "title"       => $_POST['title'],
             "descripcion" => $_POST['descripcion'],
@@ -69,10 +69,10 @@ switch ($accion)
         break;
     default:
     // Seleccionar los eventos del calendario
-        $sentenciaSQL = $pdo->prepare("SELECT * FROM eventos");
-        $sentenciaSQL->execute();
+        $sentenciaSQL = $pdo -> prepare("SELECT * FROM eventos");
+        $sentenciaSQL -> execute();
 
-        $resultado = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+        $resultado = $sentenciaSQL -> fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($resultado);
         break;
 }

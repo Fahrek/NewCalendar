@@ -11,8 +11,7 @@
         <!-- jQuery -->
         <script src='js/jquery.min.js'></script>
         <script src='js/moment.min.js'></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
         <!-- Full Calendar-->
         <link rel='stylesheet' href='css/fullcalendar.min.css' />
@@ -23,15 +22,13 @@
         <script src="js/bootstrap-clockpicker.js"></script>
         <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
         <!-- Estilos -->
         <style>
             .fc th {
-                padding: 10px 0px;
+                padding: 10px 0;
                 vertical-align: middle;
                 background: #F2F2F2
             }
@@ -64,12 +61,12 @@
                                 right: 'month,basicWeek,basicDay,agendaWeek,agendaDay'
                             },
 
-                    dayClick: function (date, jsEvent, view) 
+                    dayClick: function (date)
                     {
 
-                        $('#btnAgregar').prop("disabled", false);
+                        $('#btnAgregar').  prop("disabled", false);
                         $('#btnModificar').prop("disabled", true);
-                        $('#btnEliminar').prop("disabled", true);
+                        $('#btnEliminar'). prop("disabled", true);
 
                         limpiarFormulario();
                         $('#txtFecha').val(date.format());
@@ -78,39 +75,39 @@
 
                     events: 'http://localhost/calendarioweb/eventos.php',
 
-                    eventClick: function (calEvent, jsEvent, view) 
+                    eventClick: function (calEvent)
                     {
 
-                        $('#btnAgregar').prop("disabled", true);
+                        $('#btnAgregar').  prop("disabled", true);
                         $('#btnModificar').prop("disabled", false);
-                        $('#btnEliminar').prop("disabled", false);
+                        $('#btnEliminar'). prop("disabled", false);
 
                         // H5
                         $('#tituloEvento').html(calEvent.title);
 
                         // Mostrar la información del evento en los inputs
                         $('#txtDescripcion').val(calEvent.descripcion);
-                        $('#txtID').val(calEvent.id);
-                        $('#txtTitulo').val(calEvent.title);
-                        $('#txtColor').val(calEvent.color);
+                        $('#txtID').         val(calEvent.id);
+                        $('#txtTitulo').     val(calEvent.title);
+                        $('#txtColor').      val(calEvent.color);
 
                         FechaHora = calEvent.start._i.split(" ");
                         $('#txtFecha').val(FechaHora[0]);
-                        $('#txtHora').val(FechaHora[1]);
+                        $('#txtHora'). val(FechaHora[1]);
 
                         $("#ModalEventos").modal();
                     },
                     editable: true,
                     eventDrop: function (calEvent) 
                     {
-                        $('#txtID').val(calEvent.id);
-                        $('#txtTitulo').val(calEvent.title);
-                        $('#txtColor').val(calEvent.color);
+                        $('#txtID').         val(calEvent.id);
+                        $('#txtTitulo').     val(calEvent.title);
+                        $('#txtColor').      val(calEvent.color);
                         $('#txtDescripcion').val(calEvent.descripcion);
 
                         var FechaHora = calEvent.start.format().split("T");
                         $('#txtFecha').val(FechaHora[0]);
-                        $('#txtHora').val(FechaHora[1]);
+                        $('#txtHora'). val(FechaHora[1]);
 
                         CapturarDatosGUI();
                         EnviarInformacion('modificar', NuevoEvento, true);
@@ -158,10 +155,10 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" id='btnAgregar' class="btn btn-success">Agregar</button>
-                            <button type="button" id='btnModificar' class="btn btn-warning">Modificar</button>
-                            <button type="button" id='btnEliminar' class="btn btn-danger">Borrar</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" id='btnAgregar'      class="btn btn-success">Agregar</button>
+                            <button type="button" id='btnModificar'    class="btn btn-warning">Modificar</button>
+                            <button type="button" id='btnEliminar'     class="btn btn-danger">Borrar</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -192,13 +189,13 @@
                 {
                     NuevoEvento = 
                     {
-                        id: $('#txtID').val(),
-                        title: $('#txtTitulo').val(),
-                        start: $('#txtFecha').val() + " " + $('#txtHora').val(),
-                        color: $('#txtColor').val(),
+                        id         : $('#txtID').         val(),
+                        title      : $('#txtTitulo').     val(),
+                        start      : $('#txtFecha').      val() + " " + $('#txtHora').val(),
+                        color      : $('#txtColor').      val(),
                         descripcion: $('#txtDescripcion').val(),
-                        textColor: "#FFFFFF",
-                        end: $('#txtFecha').val() + " " + $('#txtHora').val()
+                        textColor  : "#FFFFFF",
+                        end        : $('#txtFecha').      val() + " " + $('#txtHora').val()
                     };
                 }
 
@@ -206,9 +203,9 @@
                 {
                     $.ajax(
                     {
-                        type: 'POST',
-                        url: 'eventos.php?accion=' + accion,
-                        data: objEvento,
+                        type   : 'POST',
+                        url    : 'eventos.php?accion=' + accion,
+                        data   : objEvento,
                         success: function (msg) 
                         {
                             if (msg) 
@@ -229,9 +226,9 @@
                 $('.clockpicker').clockpicker();
                 function limpiarFormulario() 
                 {
-                    $('#txtID').val('');
-                    $('#txtTitulo').val('');
-                    $('#txtColor').val('');
+                    $('#txtID').         val('');
+                    $('#txtTitulo').     val('');
+                    $('#txtColor').      val('');
                     $('#txtDescripcion').val('');
                 }
             </script>
